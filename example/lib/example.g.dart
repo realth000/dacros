@@ -9,11 +9,6 @@ part of 'example.dart';
 extension _FooAutoStr on Foo {
   String _autoStr(Foo v) {
     return '''
-Foo {
-  i=$i
-  i2=Instance of 'int?'
-  SpecifiedName=$decoratedString
-}
-''';
+Foo { i=$i, i2=Instance of 'int?', SpecifiedName=$decoratedString, }''';
   }
 }

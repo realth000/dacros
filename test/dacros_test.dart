@@ -2,6 +2,8 @@
 
 import 'package:dacros/auto_str/auto_str.dart';
 
+part 'dacros_test.g.dart';
+
 class OtherAnnotation {
   const OtherAnnotation();
 }
@@ -69,7 +71,7 @@ class Foo<T> {
 }
 
 void main() {
-  final foo = Foo(1, 200);
+  final foo = Foo(1, '123');
 
-  print('>>> "${foo.toString()}"');
+  // print('>>> "${foo.toString()}"');
 }

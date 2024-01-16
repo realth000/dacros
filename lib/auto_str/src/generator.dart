@@ -9,6 +9,8 @@ class AutoStrGenerator extends GeneratorForAnnotation<AutoStr> {
   /// Record the location of annotation [StrAttr] to filter fields attributes.
   static const _strAttrLocation = 'package:dacros/auto_str/src/annotation.dart';
 
+  static const _defaultWrapLineThreshold = 3;
+
   final BuilderOptions options;
 
   @override
@@ -84,18 +86,28 @@ class AutoStrGenerator extends GeneratorForAnnotation<AutoStr> {
       }
     }
 
-    final contents = stringPart.map((e) => '  $e').join('\n');
-
     final name = (element as ClassElement).name;
+
+    late final String body;
+
+    if (stringPart.isEmpty) {
+      body = '''\'\'\'${name} {}\'\'\';''';
+    } else if (stringPart.length <= _defaultWrapLineThreshold) {
+      final contents = stringPart.map((e) => '$e,').join(' ');
+      body = '''\'\'\'
+${name} { ${contents} }\'\'\';''';
+    } else {
+      final contents = stringPart.map((e) => '  $e,').join('\n');
+      body = '''\'\'\'
+${name} {
+${contents}
+}\'\'\';''';
+    }
 
     final result = '''
 extension _${name}AutoStr on ${name} {
   String _autoStr(${name} v) {
-    return \'\'\'
-${name} {
-${contents}
-}
-\'\'\';
+    return $body 
   }
 }
 ''';
