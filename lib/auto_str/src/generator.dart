@@ -40,6 +40,7 @@ class AutoStrGenerator extends GeneratorForAnnotation<AutoStr> {
       final f = field as FieldElement;
 
       bool hasStrAttr = false;
+      bool hasIgnored = false;
 
       for (final anno in field.metadata) {
         /// Filter out non [StrAttr] annotations.
@@ -63,11 +64,13 @@ class AutoStrGenerator extends GeneratorForAnnotation<AutoStr> {
 
         // Ignore current field if ignore is true.
         if (ignore == true) {
+          hasIgnored = true;
           continue;
         }
 
         if (asInstance == true) {
           stringPart.add("${name ?? f.name}=Instance of '${f.type}'");
+          hasStrAttr = true;
           continue;
         }
 
@@ -76,7 +79,7 @@ class AutoStrGenerator extends GeneratorForAnnotation<AutoStr> {
         break;
       }
 
-      if (!hasStrAttr) {
+      if (!hasStrAttr && !hasIgnored) {
         stringPart.add('${f.name}=\$${f.name}');
       }
     }
