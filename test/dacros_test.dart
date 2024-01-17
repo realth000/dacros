@@ -67,7 +67,7 @@ class Foo<T> {
   OtherAnnotation? testStrAttr6;
 
   @override
-  String toString() => _autoStr(this);
+  String toString() => _autoStr();
 }
 
 void main() {
