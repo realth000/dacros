@@ -19,5 +19,5 @@ class Foo {
   String? decoratedString;
 
   @override
-  String toString() => _autoStr(this);
+  String toString() => _autoStr();
 }

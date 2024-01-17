@@ -106,7 +106,7 @@ ${contents}
 
     final result = '''
 extension _${name}AutoStr on ${name} {
-  String _autoStr(${name} v) {
+  String _autoStr() {
     return $body 
   }
 }

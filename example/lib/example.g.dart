@@ -7,7 +7,7 @@ part of 'example.dart';
 // **************************************************************************
 
 extension _FooAutoStr on Foo {
-  String _autoStr(Foo v) {
+  String _autoStr() {
     return '''
 Foo { i=$i, i2=Instance of 'int?', SpecifiedName=$decoratedString, }''';
   }
